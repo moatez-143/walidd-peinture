@@ -367,6 +367,7 @@ h3 {
 }
 
 .gallery-tab {
+  appearance: none;
   display: inline-flex;
   align-items: center;
   min-height: 42px;
@@ -375,8 +376,15 @@ h3 {
   border-radius: 999px;
   background: var(--white);
   color: #344054;
+  cursor: pointer;
+  font: inherit;
   font-size: 0.9rem;
   font-weight: 900;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
 }
 
 .gallery-tab.active {
@@ -385,8 +393,13 @@ h3 {
   color: var(--white);
 }
 
-.gallery-tab.muted {
-  color: var(--muted);
+.gallery-tab:hover {
+  transform: translateY(-1px);
+}
+
+.gallery-tab:focus-visible {
+  outline: 3px solid rgba(8, 12, 143, 0.22);
+  outline-offset: 3px;
 }
 
 .gallery-grid {
@@ -397,8 +410,12 @@ h3 {
   gap: 14px;
 }
 
-.gallery-grid + .gallery-group-heading {
-  margin-top: clamp(48px, 7vw, 86px);
+.gallery-panel {
+  animation: galleryFade 260ms ease both;
+}
+
+.gallery-panel[hidden] {
+  display: none;
 }
 
 .gallery-group-heading {
@@ -417,6 +434,18 @@ h3 {
 .gallery-group-heading h3 {
   margin: 0;
   font-size: clamp(1.45rem, 2.4vw, 2.15rem);
+}
+
+@keyframes galleryFade {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .gallery-item {

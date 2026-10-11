@@ -124,16 +124,17 @@
             d’eau.
           </p>
         </div>
-        <div class="gallery-tabs" aria-label="Catégories de galerie">
-          <a class="gallery-tab active" href="#galerie-peinture">Peinture</a>
-          <a class="gallery-tab" href="#galerie-platrerie">Plâtrerie</a>
-          <a class="gallery-tab" href="#galerie-isolation">Isolation</a>
+        <div class="gallery-tabs" role="tablist" aria-label="Catégories de galerie">
+          <button class="gallery-tab active" type="button" role="tab" aria-selected="true" aria-controls="galerie-peinture" data-gallery-tab="peinture">Peinture</button>
+          <button class="gallery-tab" type="button" role="tab" aria-selected="false" aria-controls="galerie-platrerie" data-gallery-tab="platrerie">Plâtrerie</button>
+          <button class="gallery-tab" type="button" role="tab" aria-selected="false" aria-controls="galerie-isolation" data-gallery-tab="isolation">Isolation</button>
         </div>
-        <div class="gallery-group-heading" id="galerie-peinture">
-          <span>01</span>
-          <h3>Peinture</h3>
-        </div>
-        <div class="gallery-grid">
+        <div class="gallery-panel active" id="galerie-peinture" role="tabpanel" data-gallery-panel="peinture">
+          <div class="gallery-group-heading">
+            <span>01</span>
+            <h3>Peinture</h3>
+          </div>
+          <div class="gallery-grid">
           <a class="gallery-item tall" href="./assets/gallery/peinture/peinture-01.jpg" target="_blank" rel="noopener">
             <img src="./assets/gallery/peinture/peinture-01.jpg" alt="Finition peinture blanche dans une salle d’eau en rénovation" loading="lazy" />
           </a>
@@ -194,12 +195,14 @@
           <a class="gallery-item" href="./assets/gallery/peinture/peinture-20.jpg" target="_blank" rel="noopener">
             <img src="./assets/gallery/peinture/peinture-20.jpg" alt="Cuisine rénovée avec murs blancs et boiseries claires" loading="lazy" />
           </a>
+          </div>
         </div>
-        <div class="gallery-group-heading" id="galerie-platrerie">
-          <span>02</span>
-          <h3>Plâtrerie</h3>
-        </div>
-        <div class="gallery-grid">
+        <div class="gallery-panel" id="galerie-platrerie" role="tabpanel" data-gallery-panel="platrerie" hidden>
+          <div class="gallery-group-heading">
+            <span>02</span>
+            <h3>Plâtrerie</h3>
+          </div>
+          <div class="gallery-grid">
           <a class="gallery-item tall" href="./assets/gallery/platrerie/platrerie-01.jpg" target="_blank" rel="noopener">
             <img src="./assets/gallery/platrerie/platrerie-01.jpg" alt="Enduit de plâtrerie gris sur murs intérieurs" loading="lazy" />
           </a>
@@ -257,12 +260,14 @@
           <a class="gallery-item tall" href="./assets/gallery/platrerie/platrerie-19.jpg" target="_blank" rel="noopener">
             <img src="./assets/gallery/platrerie/platrerie-19.jpg" alt="Angle vitré avec plaques et joints de plâtrerie" loading="lazy" />
           </a>
+          </div>
         </div>
-        <div class="gallery-group-heading" id="galerie-isolation">
-          <span>03</span>
-          <h3>Isolation</h3>
-        </div>
-        <div class="gallery-grid">
+        <div class="gallery-panel" id="galerie-isolation" role="tabpanel" data-gallery-panel="isolation" hidden>
+          <div class="gallery-group-heading">
+            <span>03</span>
+            <h3>Isolation</h3>
+          </div>
+          <div class="gallery-grid">
           <a class="gallery-item wide" href="./assets/gallery/isolation/isolation-01.jpg" target="_blank" rel="noopener">
             <img src="./assets/gallery/isolation/isolation-01.jpg" alt="Façade avec panneaux isolants et échafaudage" loading="lazy" />
           </a>
@@ -290,6 +295,7 @@
           <a class="gallery-item wide" href="./assets/gallery/isolation/isolation-09.jpg" target="_blank" rel="noopener">
             <img src="./assets/gallery/isolation/isolation-09.jpg" alt="Maison sous échafaudage avec isolation et finition de façade" loading="lazy" />
           </a>
+          </div>
         </div>
       </section>
 
@@ -368,5 +374,27 @@
       <p>BW Plâtrerie Peinture · Walid Banga</p>
       <a href="mailto:bw.platreriepeinture@gmail.com">Devis sans engagement</a>
     </footer>
+    <script>
+      const galleryTabs = document.querySelectorAll("[data-gallery-tab]");
+      const galleryPanels = document.querySelectorAll("[data-gallery-panel]");
+
+      galleryTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const target = tab.dataset.galleryTab;
+
+          galleryTabs.forEach((item) => {
+            const isActive = item === tab;
+            item.classList.toggle("active", isActive);
+            item.setAttribute("aria-selected", String(isActive));
+          });
+
+          galleryPanels.forEach((panel) => {
+            const isActive = panel.dataset.galleryPanel === target;
+            panel.hidden = !isActive;
+            panel.classList.toggle("active", isActive);
+          });
+        });
+      });
+    </script>
   </body>
 </html>
