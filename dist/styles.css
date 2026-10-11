@@ -397,6 +397,28 @@ h3 {
   gap: 14px;
 }
 
+.gallery-grid + .gallery-group-heading {
+  margin-top: clamp(48px, 7vw, 86px);
+}
+
+.gallery-group-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 18px;
+  scroll-margin-top: 110px;
+}
+
+.gallery-group-heading span {
+  color: var(--blue);
+  font-weight: 950;
+}
+
+.gallery-group-heading h3 {
+  margin: 0;
+  font-size: clamp(1.45rem, 2.4vw, 2.15rem);
+}
+
 .gallery-item {
   position: relative;
   display: block;
